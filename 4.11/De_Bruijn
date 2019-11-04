@@ -1,0 +1,45 @@
+// Нахождение последовательности Де-Брейна
+
+#include <iostream>
+#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
+
+unordered_set <string> C;
+vector <int> B;
+
+void D (string n, int &k, string & A) {
+  for (int i = 0; i < k; ++i) {
+      string s = n + A[i];
+      if (C.find (s) == C.end ()) {
+	  C.insert (s);
+	  D (s.substr (1), k, A);
+	  B.push_back (i);
+	}
+}
+}
+
+string f (int n, int k, string A) {
+  C.clear ();
+  B.clear ();
+  string t = string (n - 1, A[0]);
+  D (t, k, A);
+  string r;
+  int x = pow (k, n);
+  for (int i = 0; i < l; ++i)
+  r += A[B[i]];
+  r += t;
+  return r;
+}
+
+int main () {
+  int n, k;
+  cin >> n;
+  cin >> k;
+
+  string A = "abc";
+  cout << f (n, k, A);
+
+
+  return 0;
+}
