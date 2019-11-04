@@ -1,0 +1,59 @@
+// Поиск Гамильтонова цикла в условиях выполнения критерия Оре
+
+#include <iostream>
+#include <deque>
+#include <iterator>
+using namespace std;
+
+deque <int> C;
+
+void ham_cyc (bool ** A, int n) {
+
+  for (int i = 0; i < n * (n - 1); i++) {
+      if (A[C.at (0)][C.at (1)] == 0) {
+	  int p = 2;
+
+	  while (A[C.at (0)][C.at (p)] == 0 || A[C.at (0)][C.at (p + 1)] == 0){
+	    p++;
+    }
+
+	  int s = C.at (p);
+	  C.erase (C.cbegin () + p);
+	  C.insert (C.cbegin () + p, C.at (1));
+	  C.erase (++C.cbegin ());
+	  C.insert (++C.cbegin (), s);
+	  }
+
+    C.push_back (C.front ());
+    C.pop_front ();
+  }
+
+  for (int i = 0; i < n; i++)
+    cout << C.at (i) + 1 << " ";
+}
+
+int main () {
+
+  int n;
+  bool ** A;
+  cin >> n;
+  A = new bool *[n];
+
+  for (int i = 0; i < n; i++) {
+      A[i] = new bool[n];
+  }
+
+  for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++)	{
+	  cin >> A[i][j];
+	}
+    }
+
+  for (int i = 0; i < n; i++) {
+      C.push_back (i);
+ }
+
+  ham_cyc (A, n);
+  
+  return 0;
+}
